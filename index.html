@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>4-Day Sculpt & Tone</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     * { box-sizing: border-box; }
@@ -14,11 +14,11 @@
       --bg: #f7f9ff;
       --card: #ffffff;
       --ink: #25304f;
-      --muted: #687599;
-      --periwinkle: #d9e3ff;
-      --periwinkle-strong: #aebfff;
+      --muted: #6c789b;
+      --periwinkle: #dfe7ff;
+      --periwinkle-2: #cdd9ff;
       --blue: #7f9cf5;
-      --line: #dde6ff;
+      --line: #dfe6fb;
       --shadow: 0 18px 44px rgba(80, 96, 150, 0.12);
     }
 
@@ -26,16 +26,16 @@
       margin: 0;
       min-height: 100vh;
       background:
-        radial-gradient(circle at top left, #e3ebff 0, transparent 34%),
-        radial-gradient(circle at top right, #eef3ff 0, transparent 28%),
+        radial-gradient(circle at top left, #dfe7ff 0, transparent 35%),
+        radial-gradient(circle at top right, #edf4ff 0, transparent 30%),
         var(--bg);
       color: var(--ink);
-      font-family: "Inter", sans-serif;
+      font-family: "Manrope", sans-serif;
       padding-bottom: 60px;
     }
 
     .header {
-      padding: 52px 22px 38px;
+      padding: 54px 22px 38px;
       text-align: center;
     }
 
@@ -50,10 +50,9 @@
 
     h1 {
       margin: 0;
-      font-family: "Plus Jakarta Sans", sans-serif;
       font-size: clamp(36px, 7vw, 56px);
       line-height: 1;
-      letter-spacing: -0.05em;
+      letter-spacing: -0.06em;
       color: #26345f;
     }
 
@@ -110,7 +109,7 @@
     .day-tab {
       border: 1px solid var(--line);
       border-radius: 18px;
-      background: rgba(255,255,255,0.85);
+      background: rgba(255,255,255,0.9);
       color: #526083;
       padding: 14px 8px;
       cursor: pointer;
@@ -121,12 +120,12 @@
 
     .day-tab:hover {
       transform: translateY(-1px);
-      border-color: var(--periwinkle-strong);
+      border-color: var(--periwinkle-2);
     }
 
     .day-tab.active {
-      background: var(--periwinkle);
-      border-color: var(--periwinkle-strong);
+      background: linear-gradient(135deg, var(--periwinkle), #eef3ff);
+      border-color: var(--periwinkle-2);
       color: #25304f;
       box-shadow: 0 14px 30px rgba(80, 96, 150, 0.16);
     }
@@ -155,7 +154,7 @@
     }
 
     .day-card-header {
-      background: linear-gradient(135deg, var(--periwinkle), #eef3ff);
+      background: linear-gradient(135deg, var(--periwinkle), #f3f6ff);
       padding: 24px;
     }
 
@@ -177,7 +176,6 @@
 
     .day-card-title {
       margin: 0;
-      font-family: "Plus Jakarta Sans", sans-serif;
       font-size: 27px;
       line-height: 1.12;
       letter-spacing: -0.04em;
@@ -228,6 +226,11 @@
       padding: 14px 15px;
       margin-bottom: 11px;
       border: 1px solid transparent;
+      transition: transform 0.15s ease;
+    }
+
+    .exercise:hover {
+      transform: translateY(-1px);
     }
 
     .core { background: #fff4dc; border-color: #f1d596; }
@@ -284,7 +287,7 @@
 
     .tips-btn {
       width: 100%;
-      border: 1px solid var(--periwinkle-strong);
+      border: 1px solid var(--periwinkle-2);
       background: white;
       color: #40528a;
       border-radius: 18px;
@@ -354,7 +357,6 @@
 
     .rest-title {
       margin: 0 0 8px;
-      font-family: "Plus Jakarta Sans", sans-serif;
       font-size: 22px;
       letter-spacing: -0.04em;
       color: #2f3c67;
@@ -431,249 +433,89 @@
 
     <section class="day-card active" data-card="0">
       <div class="day-card-header">
-        <div class="day-card-header-inner">
-          <div>
-            <p class="day-card-tag">Mon / Thu</p>
-            <h2 class="day-card-title">Full Body + Core Focus</h2>
-          </div>
-          <div class="duration-badge">⏱ ~40 min</div>
-        </div>
+        <p class="day-card-tag">Mon / Thu</p>
+        <h2 class="day-card-title">Full Body + Core Focus</h2>
       </div>
 
       <div class="day-card-body">
-        <div class="info-row">
-          <span class="info-icon">🔥</span>
-          <div>
-            <span class="info-lbl">Warm-up</span>
-            <span class="info-val">5 min walkpad, easy pace</span>
-          </div>
-        </div>
+        <div class="info-row"><span class="info-icon">🔥</span><div><span class="info-lbl">Warm-up</span><span class="info-val">5 min walkpad, easy pace</span></div></div>
 
         <p class="section-label">Exercises</p>
 
-        <div class="exercise core">
-          <div class="exercise-top"><span class="exercise-name">Dead Bug</span><span class="exercise-sets">3 × 10 each side</span></div>
-          <p class="exercise-note">Slow and controlled. Great for deep core activation and lower belly control.</p>
-        </div>
+        <div class="exercise core"><div class="exercise-top"><span class="exercise-name">Dead Bug</span><span class="exercise-sets">3 × 10 each side</span></div><p class="exercise-note">Slow and controlled. Great for deep core activation and lower belly control.</p></div>
+        <div class="exercise upper"><div class="exercise-top"><span class="exercise-name">Lat Pulldown</span><span class="exercise-sets">3 × 12 reps</span></div><p class="exercise-note">Squeeze your shoulder blades at the bottom. Keep the movement smooth.</p></div>
+        <div class="exercise glute"><div class="exercise-top"><span class="exercise-name">Glute Bridge</span><span class="exercise-sets">3 × 15 reps</span></div><p class="exercise-note">Hold 2 seconds at the top. Add a resistance band above your knees for extra burn.</p></div>
+        <div class="exercise upper"><div class="exercise-top"><span class="exercise-name">Dumbbell Row</span><span class="exercise-sets">3 × 10 each side</span></div><p class="exercise-note">Brace your core, hinge forward, and keep your back flat.</p></div>
+        <div class="exercise core"><div class="exercise-top"><span class="exercise-name">Dumbbell Side Bend</span><span class="exercise-sets">3 × 12 each side</span></div><p class="exercise-note">Move slowly. Think controlled waist and oblique work, not momentum.</p></div>
+        <div class="exercise lower"><div class="exercise-top"><span class="exercise-name">Dumbbell Romanian Deadlift</span><span class="exercise-sets">3 × 12 reps</span></div><p class="exercise-note">Hinge from the hips and feel your hamstrings stretch.</p></div>
 
-        <div class="exercise upper">
-          <div class="exercise-top"><span class="exercise-name">Lat Pulldown</span><span class="exercise-sets">3 × 12 reps</span></div>
-          <p class="exercise-note">Squeeze your shoulder blades at the bottom. Keep the movement smooth.</p>
-        </div>
-
-        <div class="exercise glute">
-          <div class="exercise-top"><span class="exercise-name">Glute Bridge</span><span class="exercise-sets">3 × 15 reps</span></div>
-          <p class="exercise-note">Hold 2 seconds at the top. Add a resistance band above your knees for extra burn.</p>
-        </div>
-
-        <div class="exercise upper">
-          <div class="exercise-top"><span class="exercise-name">Dumbbell Row</span><span class="exercise-sets">3 × 10 each side</span></div>
-          <p class="exercise-note">Brace your core, hinge forward, and keep your back flat.</p>
-        </div>
-
-        <div class="exercise core">
-          <div class="exercise-top"><span class="exercise-name">Dumbbell Side Bend</span><span class="exercise-sets">3 × 12 each side</span></div>
-          <p class="exercise-note">Move slowly. Think controlled waist and oblique work, not momentum.</p>
-        </div>
-
-        <div class="exercise lower">
-          <div class="exercise-top"><span class="exercise-name">Dumbbell Romanian Deadlift</span><span class="exercise-sets">3 × 12 reps</span></div>
-          <p class="exercise-note">Hinge from the hips and feel your hamstrings stretch.</p>
-        </div>
-
-        <div class="info-row cooldown-row">
-          <span class="info-icon">🧘‍♀️</span>
-          <div>
-            <span class="info-lbl">Cool-down</span>
-            <span class="info-val">5 min: hip flexors, hamstrings, cat-cow</span>
-          </div>
-        </div>
+        <div class="info-row cooldown-row"><span class="info-icon">🧘‍♀️</span><div><span class="info-lbl">Cool-down</span><span class="info-val">5 min: hip flexors, hamstrings, cat-cow</span></div></div>
       </div>
     </section>
 
     <section class="day-card" data-card="1">
       <div class="day-card-header">
-        <div class="day-card-header-inner">
-          <div>
-            <p class="day-card-tag">Tue / Fri</p>
-            <h2 class="day-card-title">Pilates + Lower Belly &amp; Glutes</h2>
-          </div>
-          <div class="duration-badge">⏱ ~35 min</div>
-        </div>
+        <p class="day-card-tag">Tue / Fri</p>
+        <h2 class="day-card-title">Pilates + Lower Belly &amp; Glutes</h2>
       </div>
 
       <div class="day-card-body">
-        <div class="info-row">
-          <span class="info-icon">🔥</span>
-          <div>
-            <span class="info-lbl">Warm-up</span>
-            <span class="info-val">5 min walkpad, moderate pace</span>
-          </div>
-        </div>
+        <div class="info-row"><span class="info-icon">🔥</span><div><span class="info-lbl">Warm-up</span><span class="info-val">5 min walkpad, moderate pace</span></div></div>
 
         <p class="section-label">Exercises</p>
 
-        <div class="exercise core">
-          <div class="exercise-top"><span class="exercise-name">Hundred</span><span class="exercise-sets">1 × 100 pumps</span></div>
-          <p class="exercise-note">Keep your low back pressed down. Modify with bent knees if needed.</p>
-        </div>
+        <div class="exercise core"><div class="exercise-top"><span class="exercise-name">Hundred</span><span class="exercise-sets">1 × 100 pumps</span></div><p class="exercise-note">Keep your low back pressed down. Modify with bent knees if needed.</p></div>
+        <div class="exercise core"><div class="exercise-top"><span class="exercise-name">Leg Circles</span><span class="exercise-sets">3 × 10 each leg</span></div><p class="exercise-note">Keep your pelvis still. Small circles are totally fine.</p></div>
+        <div class="exercise glute"><div class="exercise-top"><span class="exercise-name">Clamshell</span><span class="exercise-sets">3 × 15 each side</span></div><p class="exercise-note">Targets the side glutes for hip shape and stability.</p></div>
+        <div class="exercise glute"><div class="exercise-top"><span class="exercise-name">Donkey Kicks</span><span class="exercise-sets">3 × 15 each side</span></div><p class="exercise-note">Squeeze at the top. Keep your hips square.</p></div>
+        <div class="exercise core"><div class="exercise-top"><span class="exercise-name">Reverse Crunch</span><span class="exercise-sets">3 × 12 reps</span></div><p class="exercise-note">Lift your hips without swinging your legs.</p></div>
+        <div class="exercise core"><div class="exercise-top"><span class="exercise-name">Dumbbell Side Bend</span><span class="exercise-sets">3 × 12 each side</span></div><p class="exercise-note">Slow, gentle, and controlled.</p></div>
 
-        <div class="exercise core">
-          <div class="exercise-top"><span class="exercise-name">Leg Circles</span><span class="exercise-sets">3 × 10 each leg</span></div>
-          <p class="exercise-note">Keep your pelvis still. Small circles are totally fine.</p>
-        </div>
-
-        <div class="exercise glute">
-          <div class="exercise-top"><span class="exercise-name">Clamshell</span><span class="exercise-sets">3 × 15 each side</span></div>
-          <p class="exercise-note">Targets the side glutes for hip shape and stability.</p>
-        </div>
-
-        <div class="exercise glute">
-          <div class="exercise-top"><span class="exercise-name">Donkey Kicks</span><span class="exercise-sets">3 × 15 each side</span></div>
-          <p class="exercise-note">Squeeze at the top. Keep your hips square.</p>
-        </div>
-
-        <div class="exercise core">
-          <div class="exercise-top"><span class="exercise-name">Reverse Crunch</span><span class="exercise-sets">3 × 12 reps</span></div>
-          <p class="exercise-note">Lift your hips without swinging your legs.</p>
-        </div>
-
-        <div class="exercise core">
-          <div class="exercise-top"><span class="exercise-name">Dumbbell Side Bend</span><span class="exercise-sets">3 × 12 each side</span></div>
-          <p class="exercise-note">Slow, gentle, and controlled.</p>
-        </div>
-
-        <div class="info-row cooldown-row">
-          <span class="info-icon">🧘‍♀️</span>
-          <div>
-            <span class="info-lbl">Cool-down</span>
-            <span class="info-val">5 min: child’s pose, seated twist, pigeon stretch</span>
-          </div>
-        </div>
+        <div class="info-row cooldown-row"><span class="info-icon">🧘‍♀️</span><div><span class="info-lbl">Cool-down</span><span class="info-val">5 min: child’s pose, seated twist, pigeon stretch</span></div></div>
       </div>
     </section>
 
     <section class="day-card" data-card="2">
       <div class="day-card-header">
-        <div class="day-card-header-inner">
-          <div>
-            <p class="day-card-tag">Wed / Sat</p>
-            <h2 class="day-card-title">Upper Body + Core Stability</h2>
-          </div>
-          <div class="duration-badge">⏱ ~40 min</div>
-        </div>
+        <p class="day-card-tag">Wed / Sat</p>
+        <h2 class="day-card-title">Upper Body + Core Stability</h2>
       </div>
 
       <div class="day-card-body">
-        <div class="info-row">
-          <span class="info-icon">🔥</span>
-          <div>
-            <span class="info-lbl">Warm-up</span>
-            <span class="info-val">5 min walkpad, brisk walk</span>
-          </div>
-        </div>
+        <div class="info-row"><span class="info-icon">🔥</span><div><span class="info-lbl">Warm-up</span><span class="info-val">5 min walkpad, brisk walk</span></div></div>
 
         <p class="section-label">Exercises</p>
 
-        <div class="exercise upper">
-          <div class="exercise-top"><span class="exercise-name">Lat Pulldown, Wide Grip</span><span class="exercise-sets">3 × 12 reps</span></div>
-          <p class="exercise-note">Great for back definition and posture.</p>
-        </div>
+        <div class="exercise upper"><div class="exercise-top"><span class="exercise-name">Lat Pulldown, Wide Grip</span><span class="exercise-sets">3 × 12 reps</span></div><p class="exercise-note">Great for back definition and posture.</p></div>
+        <div class="exercise upper"><div class="exercise-top"><span class="exercise-name">Face Pull</span><span class="exercise-sets">3 × 15 reps</span></div><p class="exercise-note">Pull toward your forehead with elbows high.</p></div>
+        <div class="exercise upper"><div class="exercise-top"><span class="exercise-name">Dumbbell Shoulder Press</span><span class="exercise-sets">3 × 10 reps</span></div><p class="exercise-note">Brace your core and avoid arching your back.</p></div>
+        <div class="exercise core"><div class="exercise-top"><span class="exercise-name">Dumbbell Side Bend</span><span class="exercise-sets">3 × 12 each side</span></div><p class="exercise-note">Slow and controlled waist work.</p></div>
+        <div class="exercise upper"><div class="exercise-top"><span class="exercise-name">Dumbbell Bicep Curl</span><span class="exercise-sets">3 × 12 reps</span></div><p class="exercise-note">Control the lowering phase — that’s where the work is.</p></div>
+        <div class="exercise core"><div class="exercise-top"><span class="exercise-name">Bird Dog</span><span class="exercise-sets">3 × 10 each side</span></div><p class="exercise-note">Keep your hips level. Think balance, core, and glute activation.</p></div>
 
-        <div class="exercise upper">
-          <div class="exercise-top"><span class="exercise-name">Face Pull</span><span class="exercise-sets">3 × 15 reps</span></div>
-          <p class="exercise-note">Pull toward your forehead with elbows high.</p>
-        </div>
-
-        <div class="exercise upper">
-          <div class="exercise-top"><span class="exercise-name">Dumbbell Shoulder Press</span><span class="exercise-sets">3 × 10 reps</span></div>
-          <p class="exercise-note">Brace your core and avoid arching your back.</p>
-        </div>
-
-        <div class="exercise core">
-          <div class="exercise-top"><span class="exercise-name">Dumbbell Side Bend</span><span class="exercise-sets">3 × 12 each side</span></div>
-          <p class="exercise-note">Slow and controlled waist work.</p>
-        </div>
-
-        <div class="exercise upper">
-          <div class="exercise-top"><span class="exercise-name">Dumbbell Bicep Curl</span><span class="exercise-sets">3 × 12 reps</span></div>
-          <p class="exercise-note">Control the lowering phase — that’s where the work is.</p>
-        </div>
-
-        <div class="exercise core">
-          <div class="exercise-top"><span class="exercise-name">Bird Dog</span><span class="exercise-sets">3 × 10 each side</span></div>
-          <p class="exercise-note">Keep your hips level. Think balance, core, and glute activation.</p>
-        </div>
-
-        <div class="info-row cooldown-row">
-          <span class="info-icon">🧘‍♀️</span>
-          <div>
-            <span class="info-lbl">Cool-down</span>
-            <span class="info-val">5 min: chest opener, thoracic rotation, forward fold</span>
-          </div>
-        </div>
+        <div class="info-row cooldown-row"><span class="info-icon">🧘‍♀️</span><div><span class="info-lbl">Cool-down</span><span class="info-val">5 min: chest opener, thoracic rotation, forward fold</span></div></div>
       </div>
     </section>
 
     <section class="day-card" data-card="3">
       <div class="day-card-header">
-        <div class="day-card-header-inner">
-          <div>
-            <p class="day-card-tag">Sat / Sun</p>
-            <h2 class="day-card-title">Cardio + Full Body Sculpt</h2>
-          </div>
-          <div class="duration-badge">⏱ ~45 min</div>
-        </div>
+        <p class="day-card-tag">Sat / Sun</p>
+        <h2 class="day-card-title">Cardio + Full Body Sculpt</h2>
       </div>
 
       <div class="day-card-body">
-        <div class="info-row">
-          <span class="info-icon">🔥</span>
-          <div>
-            <span class="info-lbl">Warm-up</span>
-            <span class="info-val">10 min walkpad — start easy, build to brisk</span>
-          </div>
-        </div>
+        <div class="info-row"><span class="info-icon">🔥</span><div><span class="info-lbl">Warm-up</span><span class="info-val">10 min walkpad — start easy, build to brisk</span></div></div>
 
         <p class="section-label">Exercises</p>
 
-        <div class="exercise cardio">
-          <div class="exercise-top"><span class="exercise-name">Walkpad Intervals</span><span class="exercise-sets">15 min total</span></div>
-          <p class="exercise-note">2 min easy, 1 min fast, repeat.</p>
-        </div>
+        <div class="exercise cardio"><div class="exercise-top"><span class="exercise-name">Walkpad Intervals</span><span class="exercise-sets">15 min total</span></div><p class="exercise-note">2 min easy, 1 min fast, repeat.</p></div>
+        <div class="exercise full"><div class="exercise-top"><span class="exercise-name">Dumbbell Squat to Press</span><span class="exercise-sets">3 × 12 reps</span></div><p class="exercise-note">Squat down, then press dumbbells overhead as you stand.</p></div>
+        <div class="exercise core"><div class="exercise-top"><span class="exercise-name">Pilates Roll-Up</span><span class="exercise-sets">3 × 10 reps</span></div><p class="exercise-note">Slow and controlled. Modify with bent knees if needed.</p></div>
+        <div class="exercise glute"><div class="exercise-top"><span class="exercise-name">Clamshell</span><span class="exercise-sets">3 × 15 each side</span></div><p class="exercise-note">Add a band above the knees when you want to level up.</p></div>
+        <div class="exercise lower"><div class="exercise-top"><span class="exercise-name">Dumbbell Romanian Deadlift</span><span class="exercise-sets">3 × 12 reps</span></div><p class="exercise-note">Hamstrings, glutes, and back all at once.</p></div>
+        <div class="exercise core"><div class="exercise-top"><span class="exercise-name">Dead Bug</span><span class="exercise-sets">3 × 10 each side</span></div><p class="exercise-note">Finish with control. Deep core stabilizer.</p></div>
 
-        <div class="exercise full">
-          <div class="exercise-top"><span class="exercise-name">Dumbbell Squat to Press</span><span class="exercise-sets">3 × 12 reps</span></div>
-          <p class="exercise-note">Squat down, then press dumbbells overhead as you stand.</p>
-        </div>
-
-        <div class="exercise core">
-          <div class="exercise-top"><span class="exercise-name">Pilates Roll-Up</span><span class="exercise-sets">3 × 10 reps</span></div>
-          <p class="exercise-note">Slow and controlled. Modify with bent knees if needed.</p>
-        </div>
-
-        <div class="exercise glute">
-          <div class="exercise-top"><span class="exercise-name">Clamshell</span><span class="exercise-sets">3 × 15 each side</span></div>
-          <p class="exercise-note">Add a band above the knees when you want to level up.</p>
-        </div>
-
-        <div class="exercise lower">
-          <div class="exercise-top"><span class="exercise-name">Dumbbell Romanian Deadlift</span><span class="exercise-sets">3 × 12 reps</span></div>
-          <p class="exercise-note">Hamstrings, glutes, and back all at once.</p>
-        </div>
-
-        <div class="exercise core">
-          <div class="exercise-top"><span class="exercise-name">Dead Bug</span><span class="exercise-sets">3 × 10 each side</span></div>
-          <p class="exercise-note">Finish with control. Deep core stabilizer.</p>
-        </div>
-
-        <div class="info-row cooldown-row">
-          <span class="info-icon">🧘‍♀️</span>
-          <div>
-            <span class="info-lbl">Cool-down</span>
-            <span class="info-val">5–10 min full stretch: hips, back, hamstrings</span>
-          </div>
-        </div>
+        <div class="info-row cooldown-row"><span class="info-icon">🧘‍♀️</span><div><span class="info-lbl">Cool-down</span><span class="info-val">5–10 min full stretch: hips, back, hamstrings</span></div></div>
       </div>
     </section>
 
@@ -686,42 +528,13 @@
       <span class="legend-tag" style="background:#f1e9ff;color:#704cae">full</span>
     </div>
 
-    <button type="button" class="tips-btn" id="tipsBtn">
-      ▼ Show Results Tips &amp; Lifestyle Notes
-    </button>
+    <button type="button" class="tips-btn" id="tipsBtn">▼ Show Results Tips &amp; Lifestyle Notes</button>
 
     <div class="tips-list" id="tipsList">
-      <div class="tip-card">
-        <span class="tip-icon">🥗</span>
-        <div>
-          <p class="tip-title">Protein first</p>
-          <p class="tip-body">Aim for protein at every meal to support muscle tone and recovery.</p>
-        </div>
-      </div>
-
-      <div class="tip-card">
-        <span class="tip-icon">🚶‍♀️</span>
-        <div>
-          <p class="tip-title">Daily walks count</p>
-          <p class="tip-body">Even 20–30 minutes of easy walking on rest days can help progress.</p>
-        </div>
-      </div>
-
-      <div class="tip-card">
-        <span class="tip-icon">💧</span>
-        <div>
-          <p class="tip-title">Hydration matters</p>
-          <p class="tip-body">Bloating can mimic fat. Water and lower sodium can help you feel less puffy.</p>
-        </div>
-      </div>
-
-      <div class="tip-card">
-        <span class="tip-icon">😴</span>
-        <div>
-          <p class="tip-title">Sleep = results</p>
-          <p class="tip-body">Recovery is part of training. Your body changes during rest.</p>
-        </div>
-      </div>
+      <div class="tip-card"><span class="tip-icon">🥗</span><div><p class="tip-title">Protein first</p><p class="tip-body">Aim for protein at every meal to support muscle tone and recovery.</p></div></div>
+      <div class="tip-card"><span class="tip-icon">🚶‍♀️</span><div><p class="tip-title">Daily walks count</p><p class="tip-body">Even 20–30 minutes of easy walking on rest days can help progress.</p></div></div>
+      <div class="tip-card"><span class="tip-icon">💧</span><div><p class="tip-title">Hydration matters</p><p class="tip-body">Bloating can mimic fat. Water and lower sodium can help you feel less puffy.</p></div></div>
+      <div class="tip-card"><span class="tip-icon">😴</span><div><p class="tip-title">Sleep = results</p><p class="tip-body">Recovery is part of training. Your body changes during rest.</p></div></div>
     </div>
 
     <div class="rest-card">
