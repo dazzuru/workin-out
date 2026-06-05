@@ -1,273 +1,396 @@
-import { useState } from "react"; // updated-v3 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4-Day Sculpt & Tone</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      background: #faf8f5;
+      min-height: 100vh;
+      padding-bottom: 60px;
+    }
 
-const days = [
-  {
-    id: 1,
-    label: "Day 1",
-    title: "Full Body + Core Focus",
-    tag: "Mon / Thu",
-    color: "#c8a97e",
-    emoji: "✦",
-    duration: "~40 min",
-    warmup: "5 min walkpad, easy pace",
-    exercises: [
-      { name: "Dead Bug", sets: "3 × 10 each side", note: "Mat. Slow & controlled — the best deep core activator for lower belly.", category: "core" },
-      { name: "Lat Pulldown", sets: "3 × 12 reps", note: "Squeeze shoulder blades at bottom. Full range of motion.", category: "upper" },
-      { name: "Glute Bridge", sets: "3 × 15 reps", note: "Mat. Hold 2 sec at top. Add a resistance band above knees for extra glute burn.", category: "glute" },
-      { name: "Dumbbell Row (single arm)", sets: "3 × 10 each side", note: "Standing, hinge forward. Brace core, keep back flat.", category: "upper" },
-      { name: "Dumbbell Side Bend", sets: "3 × 12 each side", note: "Standing. Hold one dumbbell, slowly bend to side. Targets obliques & waist.", category: "core" },
-      { name: "Dumbbell Romanian Deadlift", sets: "3 × 12 reps", note: "Standing. Hinge from hips, feel hamstrings stretch. Great for back flab area.", category: "lower" },
-    ],
-    cooldown: "5 min: hip flexors, hamstrings, cat-cow",
-  },
-  {
-    id: 2,
-    label: "Day 2",
-    title: "Pilates + Lower Belly & Glutes",
-    tag: "Tue / Fri",
-    color: "#a9c0b4",
-    emoji: "◈",
-    duration: "~35 min",
-    warmup: "5 min walkpad, moderate pace",
-    exercises: [
-      { name: "Hundred (Pilates)", sets: "1 × 100 pumps", note: "Mat. Keep low back pressed down. Best lower belly exercise there is.", category: "core" },
-      { name: "Leg Circles (Pilates)", sets: "3 × 10 each leg", note: "Mat. Stabilizes hips and targets lower abs. Keep pelvis still.", category: "core" },
-      { name: "Clamshell", sets: "3 × 15 each side", note: "Mat, on your side. Targets glute med — great for hip shape and stability.", category: "glute" },
-      { name: "Donkey Kicks", sets: "3 × 15 each side", note: "Mat, on all fours. Squeeze glute at the top. Slow and controlled.", category: "glute" },
-      { name: "Reverse Crunch", sets: "3 × 12 reps", note: "Mat. Lift hips off the floor — no swinging. Hits lower abs directly.", category: "core" },
-      { name: "Dumbbell Side Bend", sets: "3 × 12 each side", note: "Standing. One dumbbell. Slow lateral bend — great oblique toner.", category: "core" },
-    ],
-    cooldown: "5 min: child's pose, seated twist, pigeon stretch",
-  },
-  {
-    id: 3,
-    label: "Day 3",
-    title: "Upper Body + Core Stability",
-    tag: "Wed / Sat",
-    color: "#b5a9c8",
-    emoji: "❋",
-    duration: "~40 min",
-    warmup: "5 min walkpad, brisk walk",
-    exercises: [
-      { name: "Lat Pulldown (wide grip)", sets: "3 × 12 reps", note: "Creates a strong, defined back — transforms how you look in a dress.", category: "upper" },
-      { name: "Face Pull (lat machine, rope attachment)", sets: "3 × 15 reps", note: "Attach rope to lat machine at face height. Pull to forehead, elbows high. Posture + shoulder health.", category: "upper" },
-      { name: "Dumbbell Shoulder Press", sets: "3 × 10 reps", note: "Standing. Core braced, don't arch back. Great shoulder definition.", category: "upper" },
-      { name: "Dumbbell Side Bend", sets: "3 × 12 each side", note: "Standing. Slow and controlled. Waist tightener.", category: "core" },
-      { name: "Dumbbell Bicep Curl", sets: "3 × 12 reps", note: "Standing. Slow on the way down — that's where the work is.", category: "upper" },
-      { name: "Bird Dog", sets: "3 × 10 each side", note: "Mat. Spine stability + core + glute activation. Pilates-adjacent feel.", category: "core" },
-    ],
-    cooldown: "5 min: chest opener, thoracic rotation, forward fold",
-  },
-  {
-    id: 4,
-    label: "Day 4",
-    title: "Cardio + Full Body Sculpt",
-    tag: "Sat / Sun",
-    color: "#c8b4a9",
-    emoji: "◇",
-    duration: "~45 min",
-    warmup: "10 min walkpad — start easy, build to brisk",
-    exercises: [
-      { name: "Walkpad Intervals", sets: "15 min total", note: "2 min easy → 1 min fast, repeat. Burns fat, keeps it low-impact on joints.", category: "cardio" },
-      { name: "Dumbbell Squat to Press", sets: "3 × 12 reps", note: "Standing. Squat down, press dumbbells overhead as you stand. Full body.", category: "full" },
-      { name: "Pilates Roll-Up", sets: "3 × 10 reps", note: "Mat. Slow and controlled — one of the best core exercises period.", category: "core" },
-      { name: "Clamshell", sets: "3 × 15 each side", note: "Mat. Add a resistance band above knees to level it up over time.", category: "glute" },
-      { name: "Dumbbell Romanian Deadlift", sets: "3 × 12 reps", note: "Standing. Hamstrings + glutes + back all at once.", category: "lower" },
-      { name: "Dead Bug", sets: "3 × 10 each side", note: "Mat. Finish with this — deep core stabilizer, low belly focus.", category: "core" },
-    ],
-    cooldown: "5–10 min full stretch: hips, back, hamstrings",
-  },
-];
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #2c2416 0%, #4a3728 60%, #3d2e20 100%);
+      padding: 48px 24px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 50%, rgba(200,169,126,0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(200,169,126,0.1) 0%, transparent 40%);
+    }
+    .header-eyebrow {
+      color: #c8a97e;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin: 0 0 12px;
+      opacity: 0.8;
+      position: relative;
+    }
+    .header h1 {
+      color: #faf8f5;
+      font-size: 36px;
+      font-weight: 300;
+      margin: 0 0 6px;
+      line-height: 1.1;
+      position: relative;
+    }
+    .header-sub {
+      color: #c8a97e;
+      font-size: 18px;
+      font-style: italic;
+      margin: 0 0 20px;
+      font-weight: 300;
+      position: relative;
+    }
+    .goals {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      position: relative;
+    }
+    .goal-badge {
+      background: rgba(200,169,126,0.15);
+      border-radius: 12px;
+      padding: 10px 20px;
+      border: 1px solid rgba(200,169,126,0.25);
+    }
+    .goal-badge .icon { font-size: 20px; }
+    .goal-badge .date { color: #faf8f5; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; }
+    .goal-badge .label { color: #c8a97e; font-family: 'DM Sans', sans-serif; font-size: 11px; opacity: 0.7; }
 
-const categoryColors = {
-  core: { bg: "#fff3e0", text: "#b87a2e" },
-  glute: { bg: "#fce4ec", text: "#ad3557" },
-  upper: { bg: "#e8eaf6", text: "#3d4a9e" },
-  lower: { bg: "#e8f5e9", text: "#2e7d42" },
-  cardio: { bg: "#e0f7fa", text: "#00757a" },
-  full: { bg: "#f3e5f5", text: "#7b2d8b" },
-};
+    /* Main content */
+    .main {
+      padding: 28px 20px 0;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #9e8c7a;
+      margin: 0 0 14px;
+    }
 
-const tips = [
-  { icon: "🥗", title: "Protein first", body: "Aim for protein at every meal — it preserves muscle and reduces the belly pooch over time. Think eggs, chicken, Greek yogurt, tofu." },
-  { icon: "🚶‍♀️", title: "Daily walks count", body: "Even on rest days, a 20–30 min walkpad session at easy pace dramatically speeds up results. Low stress, high return." },
-  { icon: "💧", title: "Hydration matters", body: "Bloating often mimics fat. Drink plenty of water and reduce sodium for a flatter look — especially before the wedding." },
-  { icon: "😴", title: "Sleep = results", body: "Muscle is built and fat is metabolized during sleep. 7–8 hours is part of your training plan." },
-  { icon: "📅", title: "Progress check-ins", body: "Take photos every 4 weeks, same lighting, same time of day. The scale is not the best metric for a toning goal." },
-];
+    /* Day tabs */
+    .day-tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    .day-tab {
+      background: #fff;
+      border: 2px solid #e8e0d8;
+      border-radius: 14px;
+      padding: 14px 8px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .day-tab.active { border-color: var(--day-color); background: var(--day-color); }
+    .day-tab .tab-emoji { font-size: 18px; }
+    .day-tab .tab-label { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600; color: #6b5c4e; margin-top: 4px; }
+    .day-tab.active .tab-label { color: #2c2416; }
+    .day-tab .tab-days { font-family: 'DM Sans', sans-serif; font-size: 9px; color: #9e8c7a; margin-top: 2px; opacity: 0.8; }
+    .day-tab.active .tab-days { color: #3d2e20; }
+    .day-tab .tab-duration { font-family: 'DM Sans', sans-serif; font-size: 9px; color: #b0a090; margin-top: 3px; font-weight: 500; }
+    .day-tab.active .tab-duration { color: #3d2e20; }
 
-export default function FitnessPlan() {
-  const [activeDay, setActiveDay] = useState(0);
-  const [showTips, setShowTips] = useState(false);
+    /* Day card */
+    .day-card { display: none; background: #fff; border-radius: 20px; border: 1px solid #ede6dc; overflow: hidden; margin-bottom: 20px; }
+    .day-card.active { display: block; }
+    .day-card-header { padding: 20px 24px; }
+    .day-card-header-inner { display: flex; justify-content: space-between; align-items: flex-start; }
+    .day-card-tag { font-family: 'DM Sans', sans-serif; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(44,36,22,0.6); margin: 0 0 4px; }
+    .day-card-title { font-size: 26px; font-weight: 400; color: #2c2416; margin: 0; }
+    .duration-badge {
+      background: rgba(44,36,22,0.12);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: #2c2416;
+      white-space: nowrap;
+    }
+    .day-card-body { padding: 16px 24px; }
 
-  const day = days[activeDay];
+    /* Warmup / cooldown */
+    .info-row {
+      background: #faf8f5;
+      border-radius: 10px;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .info-row .info-icon { font-size: 16px; }
+    .info-row .info-lbl { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; color: #9e8c7a; text-transform: uppercase; letter-spacing: 0.1em; }
+    .info-row .info-val { font-family: 'DM Sans', sans-serif; font-size: 13px; color: #4a3728; }
+    .warmup-row { margin-bottom: 20px; }
+    .cooldown-row { margin-top: 16px; }
 
-  return (
-    <div style={{
-      fontFamily: "'Cormorant Garamond', 'Georgia', serif",
-      background: "#faf8f5",
-      minHeight: "100vh",
-      padding: "0 0 60px 0",
-    }}>
-      <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+    /* Exercises */
+    .exercise {
+      border-radius: 0 12px 12px 0;
+      padding: 12px 16px;
+      margin-bottom: 10px;
+    }
+    .exercise-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap; }
+    .exercise-name { font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 14px; color: #2c2416; }
+    .exercise-sets { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; white-space: nowrap; }
+    .exercise-note { font-family: 'DM Sans', sans-serif; font-size: 12px; color: #6b5c4e; margin: 4px 0 0; line-height: 1.5; }
 
-      {/* Header */}
-      <div style={{
-        background: "linear-gradient(135deg, #2c2416 0%, #4a3728 60%, #3d2e20 100%)",
-        padding: "48px 24px 40px",
-        textAlign: "center",
-        position: "relative",
-        overflow: "hidden",
-      }}>
-        <div style={{
-          position: "absolute", inset: 0,
-          backgroundImage: "radial-gradient(circle at 20% 50%, rgba(200,169,126,0.15) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(200,169,126,0.1) 0%, transparent 40%)",
-        }} />
-        <p style={{ color: "#c8a97e", fontFamily: "'DM Sans', sans-serif", fontSize: 11, letterSpacing: "0.25em", textTransform: "uppercase", margin: "0 0 12px", opacity: 0.8 }}>
-          Your Personal Plan
-        </p>
-        <h1 style={{ color: "#faf8f5", fontSize: 36, fontWeight: 300, margin: "0 0 6px", lineHeight: 1.1 }}>
-          4-Day Sculpt & Tone
-        </h1>
-        <p style={{ color: "#c8a97e", fontSize: 18, fontStyle: "italic", margin: "0 0 20px", fontWeight: 300 }}>
-          for your wedding & beyond
-        </p>
-        <div style={{ display: "flex", justifyContent: "center", gap: 24, flexWrap: "wrap" }}>
-          {[["🎯", "July 2026", "First Goal"], ["💍", "Apr 10, 2027", "Wedding Day"]].map(([icon, date, label]) => (
-            <div key={date} style={{ background: "rgba(200,169,126,0.15)", borderRadius: 12, padding: "10px 20px", border: "1px solid rgba(200,169,126,0.25)" }}>
-              <div style={{ fontSize: 20 }}>{icon}</div>
-              <div style={{ color: "#faf8f5", fontSize: 13, fontFamily: "'DM Sans', sans-serif", fontWeight: 500 }}>{date}</div>
-              <div style={{ color: "#c8a97e", fontSize: 11, fontFamily: "'DM Sans', sans-serif", opacity: 0.7 }}>{label}</div>
-            </div>
-          ))}
-        </div>
+    /* Category legend */
+    .legend { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+    .legend-tag { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 20px; text-transform: capitalize; }
+
+    /* Tips */
+    .tips-btn {
+      width: 100%;
+      background: #fff;
+      border: 2px solid #2c2416;
+      border-radius: 14px;
+      padding: 14px;
+      cursor: pointer;
+      color: #2c2416;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s;
+      margin-bottom: 16px;
+    }
+    .tips-btn.open { background: #2c2416; color: #faf8f5; }
+    .tips-list { display: none; flex-direction: column; gap: 12px; }
+    .tips-list.open { display: flex; }
+    .tip-card { background: #fff; border-radius: 14px; padding: 16px 20px; border: 1px solid #ede6dc; display: flex; gap: 14px; }
+    .tip-icon { font-size: 24px; flex-shrink: 0; }
+    .tip-title { font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 14px; color: #2c2416; margin: 0 0 4px; }
+    .tip-body { font-family: 'DM Sans', sans-serif; font-size: 13px; color: #6b5c4e; margin: 0; line-height: 1.6; }
+
+    /* Rest days */
+    .rest-card {
+      background: linear-gradient(135deg, #2c2416, #4a3728);
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-top: 20px;
+      text-align: center;
+    }
+    .rest-eyebrow { color: #c8a97e; font-family: 'DM Sans', sans-serif; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; margin: 0 0 6px; }
+    .rest-title { color: #faf8f5; font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 300; margin: 0 0 8px; }
+    .rest-body { color: rgba(250,248,245,0.65); font-family: 'DM Sans', sans-serif; font-size: 13px; margin: 0; line-height: 1.6; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <p class="header-eyebrow">Your Personal Plan</p>
+    <h1>4-Day Sculpt &amp; Tone</h1>
+    <p class="header-sub">for your wedding &amp; beyond</p>
+    <div class="goals">
+      <div class="goal-badge">
+        <div class="icon">🎯</div>
+        <div class="date">July 2026</div>
+        <div class="label">First Goal</div>
       </div>
-
-      {/* Schedule overview */}
-      <div style={{ padding: "28px 20px 0", maxWidth: 680, margin: "0 auto" }}>
-        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, letterSpacing: "0.2em", textTransform: "uppercase", color: "#9e8c7a", margin: "0 0 14px" }}>Weekly Schedule</p>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 10, marginBottom: 28 }}>
-          {days.map((d, i) => (
-            <button
-              key={d.id}
-              onClick={() => setActiveDay(i)}
-              style={{
-                background: activeDay === i ? d.color : "#fff",
-                border: `2px solid ${activeDay === i ? d.color : "#e8e0d8"}`,
-                borderRadius: 14,
-                padding: "14px 8px",
-                cursor: "pointer",
-                transition: "all 0.2s",
-                textAlign: "center",
-              }}
-            >
-              <div style={{ fontSize: 18 }}>{d.emoji}</div>
-              <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, fontWeight: 600, color: activeDay === i ? "#2c2416" : "#6b5c4e", marginTop: 4 }}>{d.label}</div>
-              <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 9, color: activeDay === i ? "#3d2e20" : "#9e8c7a", opacity: 0.8, marginTop: 2 }}>{d.tag}</div>
-              <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 9, color: activeDay === i ? "#3d2e20" : "#b0a090", marginTop: 3, fontWeight: 500 }}>{d.duration}</div>
-            </button>
-          ))}
-        </div>
-
-        {/* Active day card */}
-        <div style={{ background: "#fff", borderRadius: 20, border: "1px solid #ede6dc", overflow: "hidden", marginBottom: 20 }}>
-          <div style={{ background: day.color, padding: "20px 24px" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-              <div>
-                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(44,36,22,0.6)", margin: "0 0 4px" }}>{day.tag}</p>
-                <h2 style={{ fontSize: 26, fontWeight: 400, color: "#2c2416", margin: 0 }}>{day.title}</h2>
-              </div>
-              <div style={{ background: "rgba(44,36,22,0.12)", borderRadius: 20, padding: "6px 14px", fontFamily: "'DM Sans', sans-serif", fontSize: 12, fontWeight: 600, color: "#2c2416", whiteSpace: "nowrap" }}>
-                ⏱ {day.duration}
-              </div>
-            </div>
-          </div>
-
-          <div style={{ padding: "16px 24px" }}>
-            <div style={{ background: "#faf8f5", borderRadius: 10, padding: "10px 16px", marginBottom: 20, display: "flex", alignItems: "center", gap: 8 }}>
-              <span style={{ fontSize: 16 }}>🔥</span>
-              <div>
-                <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, fontWeight: 500, color: "#9e8c7a", textTransform: "uppercase", letterSpacing: "0.1em" }}>Warm-up: </span>
-                <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "#4a3728" }}>{day.warmup}</span>
-              </div>
-            </div>
-
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", color: "#9e8c7a", margin: "0 0 12px" }}>Exercises</p>
-
-            {day.exercises.map((ex, i) => (
-              <div key={i} style={{
-                borderLeft: `3px solid ${categoryColors[ex.category].text}44`,
-                background: categoryColors[ex.category].bg,
-                borderRadius: "0 12px 12px 0",
-                padding: "12px 16px",
-                marginBottom: 10,
-              }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 8, flexWrap: "wrap" }}>
-                  <span style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 500, fontSize: 14, color: "#2c2416" }}>{ex.name}</span>
-                  <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: categoryColors[ex.category].text, fontWeight: 500, whiteSpace: "nowrap" }}>{ex.sets}</span>
-                </div>
-                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 12, color: "#6b5c4e", margin: "4px 0 0", lineHeight: 1.5 }}>{ex.note}</p>
-              </div>
-            ))}
-
-            <div style={{ background: "#faf8f5", borderRadius: 10, padding: "10px 16px", marginTop: 16, display: "flex", alignItems: "center", gap: 8 }}>
-              <span style={{ fontSize: 16 }}>🧘‍♀️</span>
-              <div>
-                <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, fontWeight: 500, color: "#9e8c7a", textTransform: "uppercase", letterSpacing: "0.1em" }}>Cool-down: </span>
-                <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "#4a3728" }}>{day.cooldown}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Category legend */}
-        <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 24 }}>
-          {Object.entries(categoryColors).map(([cat, col]) => (
-            <span key={cat} style={{
-              background: col.bg, color: col.text,
-              fontFamily: "'DM Sans', sans-serif", fontSize: 11, fontWeight: 500,
-              padding: "4px 10px", borderRadius: 20, textTransform: "capitalize"
-            }}>{cat}</span>
-          ))}
-        </div>
-
-        {/* Tips toggle */}
-        <button
-          onClick={() => setShowTips(!showTips)}
-          style={{
-            width: "100%", background: showTips ? "#2c2416" : "#fff",
-            border: "2px solid #2c2416", borderRadius: 14, padding: "14px",
-            cursor: "pointer", color: showTips ? "#faf8f5" : "#2c2416",
-            fontFamily: "'DM Sans', sans-serif", fontSize: 14, fontWeight: 500,
-            transition: "all 0.2s", marginBottom: 16,
-          }}
-        >
-          {showTips ? "▲ Hide" : "▼ Show"} Results Tips & Lifestyle Notes
-        </button>
-
-        {showTips && (
-          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-            {tips.map((tip, i) => (
-              <div key={i} style={{ background: "#fff", borderRadius: 14, padding: "16px 20px", border: "1px solid #ede6dc", display: "flex", gap: 14 }}>
-                <span style={{ fontSize: 24, flexShrink: 0 }}>{tip.icon}</span>
-                <div>
-                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: 14, color: "#2c2416", margin: "0 0 4px" }}>{tip.title}</p>
-                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "#6b5c4e", margin: 0, lineHeight: 1.6 }}>{tip.body}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* Rest days note */}
-        <div style={{ background: "linear-gradient(135deg, #2c2416, #4a3728)", borderRadius: 16, padding: "20px 24px", marginTop: 20, textAlign: "center" }}>
-          <p style={{ color: "#c8a97e", fontFamily: "'DM Sans', sans-serif", fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", margin: "0 0 6px" }}>Rest Days</p>
-          <p style={{ color: "#faf8f5", fontFamily: "'Cormorant Garamond', serif", fontSize: 18, fontWeight: 300, margin: "0 0 8px" }}>3 rest days per week</p>
-          <p style={{ color: "rgba(250,248,245,0.65)", fontFamily: "'DM Sans', sans-serif", fontSize: 13, margin: 0, lineHeight: 1.6 }}>
-            Light walking, stretching, or gentle Pilates on rest days is encouraged — but never required. Rest is when your body changes.
-          </p>
-        </div>
+      <div class="goal-badge">
+        <div class="icon">💍</div>
+        <div class="date">Apr 10, 2027</div>
+        <div class="label">Wedding Day</div>
       </div>
     </div>
-  );
-}
+  </div>
+
+  <div class="main">
+    <p class="section-label">Weekly Schedule</p>
+
+    <!-- Day tabs -->
+    <div class="day-tabs">
+      <button class="day-tab active" style="--day-color:#c8a97e" onclick="switchDay(0)" id="tab-0">
+        <div class="tab-emoji">✦</div>
+        <div class="tab-label">Day 1</div>
+        <div class="tab-days">Mon / Thu</div>
+        <div class="tab-duration">~40 min</div>
+      </button>
+      <button class="day-tab" style="--day-color:#a9c0b4" onclick="switchDay(1)" id="tab-1">
+        <div class="tab-emoji">◈</div>
+        <div class="tab-label">Day 2</div>
+        <div class="tab-days">Tue / Fri</div>
+        <div class="tab-duration">~35 min</div>
+      </button>
+      <button class="day-tab" style="--day-color:#b5a9c8" onclick="switchDay(2)" id="tab-2">
+        <div class="tab-emoji">❋</div>
+        <div class="tab-label">Day 3</div>
+        <div class="tab-days">Wed / Sat</div>
+        <div class="tab-duration">~40 min</div>
+      </button>
+      <button class="day-tab" style="--day-color:#c8b4a9" onclick="switchDay(3)" id="tab-3">
+        <div class="tab-emoji">◇</div>
+        <div class="tab-label">Day 4</div>
+        <div class="tab-days">Sat / Sun</div>
+        <div class="tab-duration">~45 min</div>
+      </button>
+    </div>
+
+    <!-- Day 1 -->
+    <div class="day-card active" id="day-0">
+      <div class="day-card-header" style="background:#c8a97e">
+        <div class="day-card-header-inner">
+          <div>
+            <p class="day-card-tag">Mon / Thu</p>
+            <h2 class="day-card-title">Full Body + Core Focus</h2>
+          </div>
+          <div class="duration-badge">⏱ ~40 min</div>
+        </div>
+      </div>
+      <div class="day-card-body">
+        <div class="info-row warmup-row"><span class="info-icon">🔥</span><div><span class="info-lbl">Warm-up: </span><span class="info-val">5 min walkpad, easy pace</span></div></div>
+        <p class="section-label">Exercises</p>
+        <div class="exercise" style="background:#fff3e0;border-left:3px solid #b87a2e44">
+          <div class="exercise-top"><span class="exercise-name">Dead Bug</span><span class="exercise-sets" style="color:#b87a2e">3 × 10 each side</span></div>
+          <p class="exercise-note">Mat. Slow &amp; controlled — the best deep core activator for lower belly.</p>
+        </div>
+        <div class="exercise" style="background:#e8eaf6;border-left:3px solid #3d4a9e44">
+          <div class="exercise-top"><span class="exercise-name">Lat Pulldown</span><span class="exercise-sets" style="color:#3d4a9e">3 × 12 reps</span></div>
+          <p class="exercise-note">Squeeze shoulder blades at bottom. Full range of motion.</p>
+        </div>
+        <div class="exercise" style="background:#fce4ec;border-left:3px solid #ad355744">
+          <div class="exercise-top"><span class="exercise-name">Glute Bridge</span><span class="exercise-sets" style="color:#ad3557">3 × 15 reps</span></div>
+          <p class="exercise-note">Mat. Hold 2 sec at top. Add a resistance band above knees for extra glute burn.</p>
+        </div>
+        <div class="exercise" style="background:#e8eaf6;border-left:3px solid #3d4a9e44">
+          <div class="exercise-top"><span class="exercise-name">Dumbbell Row (single arm)</span><span class="exercise-sets" style="color:#3d4a9e">3 × 10 each side</span></div>
+          <p class="exercise-note">Standing, hinge forward. Brace core, keep back flat.</p>
+        </div>
+        <div class="exercise" style="background:#fff3e0;border-left:3px solid #b87a2e44">
+          <div class="exercise-top"><span class="exercise-name">Dumbbell Side Bend</span><span class="exercise-sets" style="color:#b87a2e">3 × 12 each side</span></div>
+          <p class="exercise-note">Standing. Hold one dumbbell, slowly bend to side. Targets obliques &amp; waist.</p>
+        </div>
+        <div class="exercise" style="background:#e8f5e9;border-left:3px solid #2e7d4244">
+          <div class="exercise-top"><span class="exercise-name">Dumbbell Romanian Deadlift</span><span class="exercise-sets" style="color:#2e7d42">3 × 12 reps</span></div>
+          <p class="exercise-note">Standing. Hinge from hips, feel hamstrings stretch. Great for back flab area.</p>
+        </div>
+        <div class="info-row cooldown-row"><span class="info-icon">🧘‍♀️</span><div><span class="info-lbl">Cool-down: </span><span class="info-val">5 min: hip flexors, hamstrings, cat-cow</span></div></div>
+      </div>
+    </div>
+
+    <!-- Day 2 -->
+    <div class="day-card" id="day-1">
+      <div class="day-card-header" style="background:#a9c0b4">
+        <div class="day-card-header-inner">
+          <div>
+            <p class="day-card-tag">Tue / Fri</p>
+            <h2 class="day-card-title">Pilates + Lower Belly &amp; Glutes</h2>
+          </div>
+          <div class="duration-badge">⏱ ~35 min</div>
+        </div>
+      </div>
+      <div class="day-card-body">
+        <div class="info-row warmup-row"><span class="info-icon">🔥</span><div><span class="info-lbl">Warm-up: </span><span class="info-val">5 min walkpad, moderate pace</span></div></div>
+        <p class="section-label">Exercises</p>
+        <div class="exercise" style="background:#fff3e0;border-left:3px solid #b87a2e44">
+          <div class="exercise-top"><span class="exercise-name">Hundred (Pilates)</span><span class="exercise-sets" style="color:#b87a2e">1 × 100 pumps</span></div>
+          <p class="exercise-note">Mat. Keep low back pressed down. Best lower belly exercise there is.</p>
+        </div>
+        <div class="exercise" style="background:#fff3e0;border-left:3px solid #b87a2e44">
+          <div class="exercise-top"><span class="exercise-name">Leg Circles (Pilates)</span><span class="exercise-sets" style="color:#b87a2e">3 × 10 each leg</span></div>
+          <p class="exercise-note">Mat. Stabilizes hips and targets lower abs. Keep pelvis still.</p>
+        </div>
+        <div class="exercise" style="background:#fce4ec;border-left:3px solid #ad355744">
+          <div class="exercise-top"><span class="exercise-name">Clamshell</span><span class="exercise-sets" style="color:#ad3557">3 × 15 each side</span></div>
+          <p class="exercise-note">Mat, on your side. Targets glute med — great for hip shape and stability.</p>
+        </div>
+        <div class="exercise" style="background:#fce4ec;border-left:3px solid #ad355744">
+          <div class="exercise-top"><span class="exercise-name">Donkey Kicks</span><span class="exercise-sets" style="color:#ad3557">3 × 15 each side</span></div>
+          <p class="exercise-note">Mat, on all fours. Squeeze glute at the top. Slow and controlled.</p>
+        </div>
+        <div class="exercise" style="background:#fff3e0;border-left:3px solid #b87a2e44">
+          <div class="exercise-top"><span class="exercise-name">Reverse Crunch</span><span class="exercise-sets" style="color:#b87a2e">3 × 12 reps</span></div>
+          <p class="exercise-note">Mat. Lift hips off the floor — no swinging. Hits lower abs directly.</p>
+        </div>
+        <div class="exercise" style="background:#fff3e0;border-left:3px solid #b87a2e44">
+          <div class="exercise-top"><span class="exercise-name">Dumbbell Side Bend</span><span class="exercise-sets" style="color:#b87a2e">3 × 12 each side</span></div>
+          <p class="exercise-note">Standing. One dumbbell. Slow lateral bend — great oblique toner.</p>
+        </div>
+        <div class="info-row cooldown-row"><span class="info-icon">🧘‍♀️</span><div><span class="info-lbl">Cool-down: </span><span class="info-val">5 min: child's pose, seated twist, pigeon stretch</span></div></div>
+      </div>
+    </div>
+
+    <!-- Day 3 -->
+    <div class="day-card" id="day-2">
+      <div class="day-card-header" style="background:#b5a9c8">
+        <div class="day-card-header-inner">
+          <div>
+            <p class="day-card-tag">Wed / Sat</p>
+            <h2 class="day-card-title">Upper Body + Core Stability</h2>
+          </div>
+          <div class="duration-badge">⏱ ~40 min</div>
+        </div>
+      </div>
+      <div class="day-card-body">
+        <div class="info-row warmup-row"><span class="info-icon">🔥</span><div><span class="info-lbl">Warm-up: </span><span class="info-val">5 min walkpad, brisk walk</span></div></div>
+        <p class="section-label">Exercises</p>
+        <div class="exercise" style="background:#e8eaf6;border-left:3px solid #3d4a9e44">
+          <div class="exercise-top"><span class="exercise-name">Lat Pulldown (wide grip)</span><span class="exercise-sets" style="color:#3d4a9e">3 × 12 reps</span></div>
+          <p class="exercise-note">Creates a strong, defined back — transforms how you look in a dress.</p>
+        </div>
+        <div class="exercise" style="background:#e8eaf6;border-left:3px solid #3d4a9e44">
+          <div class="exercise-top"><span class="exercise-name">Face Pull (lat machine, rope attachment)</span><span class="exercise-sets" style="color:#3d4a9e">3 × 15 reps</span></div>
+          <p class="exercise-note">Attach rope to lat machine at face height. Pull to forehead, elbows high. Posture + shoulder health.</p>
+        </div>
+        <div class="exercise" style="background:#e8eaf6;border-left:3px solid #3d4a9e44">
+          <div class="exercise-top"><span class="exercise-name">Dumbbell Shoulder Press</span><span class="exercise-sets" style="color:#3d4a9e">3 × 10 reps</span></div>
+          <p class="exercise-note">Standing. Core braced, don't arch back. Great shoulder definition.</p>
+        </div>
+        <div class="exercise" style="background:#fff3e0;border-left:3px solid #b87a2e44">
+          <div class="exercise-top"><span class="exercise-name">Dumbbell Side Bend</span><span class="exercise-sets" style="color:#b87a2e">3 × 12 each side</span></div>
+          <p class="exercise-note">Standing. Slow and controlled. Waist tightener.</p>
+        </div>
+        <div class="exercise" style="background:#e8eaf6;border-left:3px solid #3d4a9e44">
+          <div class="exercise-top"><span class="exercise-name">Dumbbell Bicep Curl</span><span class="exercise-sets" style="color:#3d4a9e">3 × 12 reps</span></div>
+          <p class="exercise-note">Standing. Slow on the way down — that's where the work is.</p>
+        </div>
+        <div class="exercise" style="background:#fff3e0;border-left:3px solid #b87a2e44">
+          <div class="exercise-top"><span class="exercise-name">Bird Dog</span><span class="exercise-sets" style="color:#b87a2e">3 × 10 each side</span></div>
+          <p class="exercise-note">Mat. Spine stability + core + glute activation. Pilates-adjacent feel.</p>
+        </div>
+        <div class="info-row cooldown-row"><span class="info-icon">🧘‍♀️</span><div><span class="info-lbl">Cool-down: </span><span class="info-val">5 min: chest opener, thoracic rotation, forward fold</span></div></div>
+      </div>
+    </div>
+
+    <!-- Day 4 -->
+    <div class="day-card" id="day-3">
+      <div class="day-card-header" style="background:#c8b4a9">
+        <div class="day-card-header-inner">
+          <div>
+            <p class="day-card-tag">Sat / Sun</p>
+            <h2 class="day-card-title">Cardio + Full Body Sculpt</h2>
+          </div>
+          <div class="duration-badge">⏱ ~45 min</div>
+        </div>
+      </div>
+      <div class="day-card-body">
+        <div class="info-row warmup-row"><span class="info-icon">🔥</span><div><span class="info-lbl">Warm-up: </span><span class="info-val">10 min walkpad — start easy, build to brisk</span></div></div>
+        <p class="section-label">Exercises</p>
+        <div class="exercise" style="background:#e0f7fa;border-left:3px solid #00757a44">
+          <div class="exercise-top"><span class="exercise-name">Walkpad Intervals</span><span class="exercise-sets" style="color:#00757a">15 min total</span></div>
+          <p class="exercise-note">2 min easy → 1 min fast, repeat. Burns 
