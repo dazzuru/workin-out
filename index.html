@@ -5,53 +5,64 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>4-Day Sculpt & Tone</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      box-sizing: border-box;
+    * { box-sizing: border-box; }
+
+    :root {
+      --bg: #f7f9ff;
+      --card: #ffffff;
+      --ink: #25304f;
+      --muted: #687599;
+      --periwinkle: #d9e3ff;
+      --periwinkle-strong: #aebfff;
+      --blue: #7f9cf5;
+      --line: #dde6ff;
+      --shadow: 0 18px 44px rgba(80, 96, 150, 0.12);
     }
 
     body {
       margin: 0;
       min-height: 100vh;
-      background: #f7f9ff;
-      color: #24304f;
+      background:
+        radial-gradient(circle at top left, #e3ebff 0, transparent 34%),
+        radial-gradient(circle at top right, #eef3ff 0, transparent 28%),
+        var(--bg);
+      color: var(--ink);
       font-family: "Inter", sans-serif;
-      padding-bottom: 56px;
+      padding-bottom: 60px;
     }
 
     .header {
-      padding: 48px 22px 36px;
+      padding: 52px 22px 38px;
       text-align: center;
-      background:
-        radial-gradient(circle at top left, #dfe7ff 0, transparent 35%),
-        radial-gradient(circle at top right, #f5dff0 0, transparent 30%),
-        linear-gradient(135deg, #eef3ff, #f8fbff);
-      border-bottom: 1px solid #e0e7ff;
     }
 
     .eyebrow {
       margin: 0 0 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
       font-size: 11px;
-      font-weight: 700;
-      color: #7a8ccf;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: #6f86d9;
     }
 
     h1 {
       margin: 0;
-      font-family: "Playfair Display", serif;
-      font-size: 38px;
-      line-height: 1.08;
-      color: #2d3763;
+      font-family: "Plus Jakarta Sans", sans-serif;
+      font-size: clamp(36px, 7vw, 56px);
+      line-height: 1;
+      letter-spacing: -0.05em;
+      color: #26345f;
     }
 
     .subtitle {
-      margin: 10px 0 24px;
-      color: #69769e;
+      margin: 14px auto 26px;
+      max-width: 520px;
+      color: var(--muted);
       font-size: 15px;
+      line-height: 1.6;
     }
 
     .goals {
@@ -62,34 +73,22 @@
     }
 
     .goal-card {
-      background: rgba(255,255,255,0.75);
-      border: 1px solid #dce5ff;
-      border-radius: 18px;
-      padding: 12px 18px;
-      min-width: 130px;
-      box-shadow: 0 10px 30px rgba(99, 118, 180, 0.08);
+      min-width: 140px;
+      padding: 14px 18px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid var(--line);
+      box-shadow: 0 10px 28px rgba(80, 96, 150, 0.08);
+      backdrop-filter: blur(12px);
     }
 
-    .goal-icon {
-      font-size: 22px;
-      margin-bottom: 4px;
-    }
-
-    .goal-date {
-      font-weight: 700;
-      font-size: 14px;
-      color: #394576;
-    }
-
-    .goal-label {
-      font-size: 12px;
-      color: #7b87a8;
-      margin-top: 2px;
-    }
+    .goal-icon { font-size: 22px; margin-bottom: 4px; }
+    .goal-date { font-weight: 800; font-size: 14px; color: #2b3864; }
+    .goal-label { font-size: 12px; color: #7b88aa; margin-top: 3px; }
 
     .main {
-      width: min(720px, calc(100% - 32px));
-      margin: 28px auto 0;
+      width: min(760px, calc(100% - 32px));
+      margin: 0 auto;
     }
 
     .section-label {
@@ -98,7 +97,7 @@
       letter-spacing: 0.16em;
       font-size: 11px;
       font-weight: 800;
-      color: #8b97bd;
+      color: #8290ba;
     }
 
     .day-tabs {
@@ -109,54 +108,45 @@
     }
 
     .day-tab {
-      appearance: none;
-      border: 1px solid #dbe4ff;
-      background: #ffffff;
+      border: 1px solid var(--line);
       border-radius: 18px;
+      background: rgba(255,255,255,0.85);
+      color: #526083;
       padding: 14px 8px;
       cursor: pointer;
-      box-shadow: 0 8px 20px rgba(76, 91, 140, 0.06);
+      box-shadow: 0 8px 20px rgba(80, 96, 150, 0.06);
       transition: 0.2s ease;
-      color: #536082;
+      font-family: inherit;
     }
 
     .day-tab:hover {
       transform: translateY(-1px);
-      border-color: #b8c7ff;
+      border-color: var(--periwinkle-strong);
     }
 
     .day-tab.active {
-      background: var(--tab-color);
-      border-color: var(--tab-color);
-      color: #24304f;
-      box-shadow: 0 12px 26px rgba(101, 119, 180, 0.18);
+      background: var(--periwinkle);
+      border-color: var(--periwinkle-strong);
+      color: #25304f;
+      box-shadow: 0 14px 30px rgba(80, 96, 150, 0.16);
     }
 
-    .tab-emoji {
-      font-size: 20px;
-      margin-bottom: 4px;
-    }
-
-    .tab-label {
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .tab-days,
-    .tab-duration {
+    .tab-emoji { font-size: 20px; margin-bottom: 4px; }
+    .tab-label { font-size: 12px; font-weight: 800; }
+    .tab-days, .tab-duration {
       font-size: 10px;
       margin-top: 3px;
-      opacity: 0.75;
-      font-weight: 600;
+      font-weight: 700;
+      opacity: 0.72;
     }
 
     .day-card {
       display: none;
-      background: #ffffff;
-      border-radius: 26px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 28px;
       overflow: hidden;
-      border: 1px solid #dfe6fb;
-      box-shadow: 0 18px 45px rgba(76, 91, 140, 0.10);
+      box-shadow: var(--shadow);
       margin-bottom: 20px;
     }
 
@@ -165,8 +155,8 @@
     }
 
     .day-card-header {
-      padding: 22px;
-      background: var(--day-color);
+      background: linear-gradient(135deg, var(--periwinkle), #eef3ff);
+      padding: 24px;
     }
 
     .day-card-header-inner {
@@ -177,102 +167,75 @@
     }
 
     .day-card-tag {
-      margin: 0 0 6px;
+      margin: 0 0 8px;
       font-size: 11px;
       font-weight: 800;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: rgba(36,48,79,0.62);
+      color: rgba(37, 48, 79, 0.62);
     }
 
     .day-card-title {
       margin: 0;
-      font-family: "Playfair Display", serif;
+      font-family: "Plus Jakarta Sans", sans-serif;
       font-size: 27px;
-      line-height: 1.1;
-      color: #24304f;
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+      color: #25304f;
     }
 
     .duration-badge {
-      background: rgba(255,255,255,0.55);
-      padding: 7px 12px;
+      background: rgba(255,255,255,0.65);
+      padding: 8px 13px;
       border-radius: 999px;
       font-size: 12px;
       font-weight: 800;
       white-space: nowrap;
     }
 
-    .day-card-body {
-      padding: 20px;
-    }
+    .day-card-body { padding: 22px; }
 
     .info-row {
-      background: #f7f9ff;
-      border: 1px solid #e2e8ff;
+      background: #f8faff;
+      border: 1px solid #e3eaff;
       border-radius: 16px;
-      padding: 12px 14px;
+      padding: 13px 15px;
       display: flex;
-      align-items: flex-start;
       gap: 10px;
       margin-bottom: 18px;
     }
 
-    .info-icon {
-      font-size: 18px;
-    }
+    .info-icon { font-size: 18px; }
 
     .info-lbl {
+      display: block;
       font-size: 11px;
       font-weight: 800;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: #8995bd;
+      color: #7c8bb8;
+      margin-bottom: 2px;
     }
 
     .info-val {
-      display: block;
-      margin-top: 2px;
       font-size: 13px;
-      color: #4e5b82;
+      color: #526083;
       line-height: 1.45;
     }
 
     .exercise {
-      border-radius: 16px;
-      padding: 13px 15px;
+      border-radius: 17px;
+      padding: 14px 15px;
       margin-bottom: 11px;
       border: 1px solid transparent;
     }
 
-    .exercise.core {
-      background: #fff4db;
-      border-color: #f2d69b;
-    }
-
-    .exercise.glute {
-      background: #ffe8f1;
-      border-color: #f2bfd4;
-    }
-
-    .exercise.upper {
-      background: #e9edff;
-      border-color: #c6d0ff;
-    }
-
-    .exercise.lower {
-      background: #e6f6ed;
-      border-color: #bfe3cc;
-    }
-
-    .exercise.cardio {
-      background: #e1f7fb;
-      border-color: #b9e6ee;
-    }
-
-    .exercise.full {
-      background: #f0e8ff;
-      border-color: #d8c8ff;
-    }
+    .core { background: #fff4dc; border-color: #f1d596; }
+    .glute { background: #ffe8f2; border-color: #f2bfd5; }
+    .upper { background: #e8edff; border-color: #c7d1ff; }
+    .lower { background: #e6f7ee; border-color: #bbe3ca; }
+    .cardio { background: #e1f8fb; border-color: #b9e8ee; }
+    .full { background: #f1e9ff; border-color: #d8c9ff; }
 
     .exercise-top {
       display: flex;
@@ -291,21 +254,18 @@
     .exercise-sets {
       font-size: 12px;
       font-weight: 800;
-      color: #5e6fa9;
+      color: #5d6fa8;
       white-space: nowrap;
     }
 
     .exercise-note {
-      margin: 5px 0 0;
+      margin: 6px 0 0;
       font-size: 12px;
       line-height: 1.55;
-      color: #55617f;
+      color: #56627f;
     }
 
-    .cooldown-row {
-      margin-top: 18px;
-      margin-bottom: 0;
-    }
+    .cooldown-row { margin-top: 18px; margin-bottom: 0; }
 
     .legend {
       display: flex;
@@ -324,21 +284,20 @@
 
     .tips-btn {
       width: 100%;
-      border: 1px solid #b8c7ff;
-      background: #ffffff;
-      color: #405087;
+      border: 1px solid var(--periwinkle-strong);
+      background: white;
+      color: #40528a;
       border-radius: 18px;
       padding: 14px;
       font-size: 14px;
       font-weight: 800;
       cursor: pointer;
-      box-shadow: 0 10px 24px rgba(76, 91, 140, 0.07);
+      box-shadow: 0 10px 24px rgba(80, 96, 150, 0.07);
       margin-bottom: 14px;
+      font-family: inherit;
     }
 
-    .tips-btn.open {
-      background: #e6ecff;
-    }
+    .tips-btn.open { background: #edf2ff; }
 
     .tips-list {
       display: none;
@@ -347,23 +306,19 @@
       margin-bottom: 20px;
     }
 
-    .tips-list.open {
-      display: flex;
-    }
+    .tips-list.open { display: flex; }
 
     .tip-card {
-      background: #ffffff;
-      border: 1px solid #dfe6fb;
+      background: white;
+      border: 1px solid var(--line);
       border-radius: 18px;
       padding: 16px;
       display: flex;
       gap: 12px;
-      box-shadow: 0 10px 24px rgba(76, 91, 140, 0.06);
+      box-shadow: 0 10px 24px rgba(80, 96, 150, 0.06);
     }
 
-    .tip-icon {
-      font-size: 23px;
-    }
+    .tip-icon { font-size: 23px; }
 
     .tip-title {
       margin: 0 0 4px;
@@ -380,12 +335,12 @@
     }
 
     .rest-card {
-      background: linear-gradient(135deg, #e4ebff, #f8e9f4);
-      border: 1px solid #dfe6fb;
+      background: linear-gradient(135deg, #e3ebff, #f4f7ff);
+      border: 1px solid var(--line);
       border-radius: 24px;
       padding: 22px;
       text-align: center;
-      box-shadow: 0 12px 30px rgba(76, 91, 140, 0.08);
+      box-shadow: 0 12px 30px rgba(80, 96, 150, 0.08);
     }
 
     .rest-eyebrow {
@@ -394,13 +349,14 @@
       letter-spacing: 0.16em;
       font-size: 11px;
       font-weight: 800;
-      color: #7a8ccf;
+      color: #6f86d9;
     }
 
     .rest-title {
       margin: 0 0 8px;
-      font-family: "Playfair Display", serif;
+      font-family: "Plus Jakarta Sans", sans-serif;
       font-size: 22px;
+      letter-spacing: -0.04em;
       color: #2f3c67;
     }
 
@@ -412,21 +368,9 @@
     }
 
     @media (max-width: 560px) {
-      h1 {
-        font-size: 34px;
-      }
-
-      .day-tabs {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .day-card-header-inner {
-        flex-direction: column;
-      }
-
-      .duration-badge {
-        align-self: flex-start;
-      }
+      .day-tabs { grid-template-columns: repeat(2, 1fr); }
+      .day-card-header-inner { flex-direction: column; }
+      .duration-badge { align-self: flex-start; }
     }
   </style>
 </head>
@@ -435,7 +379,7 @@
   <header class="header">
     <p class="eyebrow">Your Personal Plan</p>
     <h1>4-Day Sculpt &amp; Tone</h1>
-    <p class="subtitle">A soft, balanced weekly plan for strength, core, and confidence.</p>
+    <p class="subtitle">A soft, balanced weekly plan for strength, core, glutes, posture, and confidence.</p>
 
     <div class="goals">
       <div class="goal-card">
@@ -456,28 +400,28 @@
     <p class="section-label">Weekly Schedule</p>
 
     <div class="day-tabs">
-      <button type="button" class="day-tab active" style="--tab-color:#dce6ff" data-day="0">
+      <button type="button" class="day-tab active" data-day="0">
         <div class="tab-emoji">✦</div>
         <div class="tab-label">Day 1</div>
         <div class="tab-days">Mon / Thu</div>
         <div class="tab-duration">~40 min</div>
       </button>
 
-      <button type="button" class="day-tab" style="--tab-color:#dff3fb" data-day="1">
+      <button type="button" class="day-tab" data-day="1">
         <div class="tab-emoji">◈</div>
         <div class="tab-label">Day 2</div>
         <div class="tab-days">Tue / Fri</div>
         <div class="tab-duration">~35 min</div>
       </button>
 
-      <button type="button" class="day-tab" style="--tab-color:#eadfff" data-day="2">
+      <button type="button" class="day-tab" data-day="2">
         <div class="tab-emoji">❋</div>
         <div class="tab-label">Day 3</div>
         <div class="tab-days">Wed / Sat</div>
         <div class="tab-duration">~40 min</div>
       </button>
 
-      <button type="button" class="day-tab" style="--tab-color:#ffe7f1" data-day="3">
+      <button type="button" class="day-tab" data-day="3">
         <div class="tab-emoji">◇</div>
         <div class="tab-label">Day 4</div>
         <div class="tab-days">Sat / Sun</div>
@@ -485,7 +429,7 @@
       </button>
     </div>
 
-    <section class="day-card active" style="--day-color:#dce6ff" data-card="0">
+    <section class="day-card active" data-card="0">
       <div class="day-card-header">
         <div class="day-card-header-inner">
           <div>
@@ -508,50 +452,32 @@
         <p class="section-label">Exercises</p>
 
         <div class="exercise core">
-          <div class="exercise-top">
-            <span class="exercise-name">Dead Bug</span>
-            <span class="exercise-sets">3 × 10 each side</span>
-          </div>
+          <div class="exercise-top"><span class="exercise-name">Dead Bug</span><span class="exercise-sets">3 × 10 each side</span></div>
           <p class="exercise-note">Slow and controlled. Great for deep core activation and lower belly control.</p>
         </div>
 
         <div class="exercise upper">
-          <div class="exercise-top">
-            <span class="exercise-name">Lat Pulldown</span>
-            <span class="exercise-sets">3 × 12 reps</span>
-          </div>
+          <div class="exercise-top"><span class="exercise-name">Lat Pulldown</span><span class="exercise-sets">3 × 12 reps</span></div>
           <p class="exercise-note">Squeeze your shoulder blades at the bottom. Keep the movement smooth.</p>
         </div>
 
         <div class="exercise glute">
-          <div class="exercise-top">
-            <span class="exercise-name">Glute Bridge</span>
-            <span class="exercise-sets">3 × 15 reps</span>
-          </div>
+          <div class="exercise-top"><span class="exercise-name">Glute Bridge</span><span class="exercise-sets">3 × 15 reps</span></div>
           <p class="exercise-note">Hold 2 seconds at the top. Add a resistance band above your knees for extra burn.</p>
         </div>
 
         <div class="exercise upper">
-          <div class="exercise-top">
-            <span class="exercise-name">Dumbbell Row</span>
-            <span class="exercise-sets">3 × 10 each side</span>
-          </div>
+          <div class="exercise-top"><span class="exercise-name">Dumbbell Row</span><span class="exercise-sets">3 × 10 each side</span></div>
           <p class="exercise-note">Brace your core, hinge forward, and keep your back flat.</p>
         </div>
 
         <div class="exercise core">
-          <div class="exercise-top">
-            <span class="exercise-name">Dumbbell Side Bend</span>
-            <span class="exercise-sets">3 × 12 each side</span>
-          </div>
+          <div class="exercise-top"><span class="exercise-name">Dumbbell Side Bend</span><span class="exercise-sets">3 × 12 each side</span></div>
           <p class="exercise-note">Move slowly. Think controlled waist and oblique work, not momentum.</p>
         </div>
 
         <div class="exercise lower">
-          <div class="exercise-top">
-            <span class="exercise-name">Dumbbell Romanian Deadlift</span>
-            <span class="exercise-sets">3 × 12 reps</span>
-          </div>
+          <div class="exercise-top"><span class="exercise-name">Dumbbell Romanian Deadlift</span><span class="exercise-sets">3 × 12 reps</span></div>
           <p class="exercise-note">Hinge from the hips and feel your hamstrings stretch.</p>
         </div>
 
@@ -565,7 +491,7 @@
       </div>
     </section>
 
-    <section class="day-card" style="--day-color:#dff3fb" data-card="1">
+    <section class="day-card" data-card="1">
       <div class="day-card-header">
         <div class="day-card-header-inner">
           <div>
@@ -588,50 +514,32 @@
         <p class="section-label">Exercises</p>
 
         <div class="exercise core">
-          <div class="exercise-top">
-            <span class="exercise-name">Hundred</span>
-            <span class="exercise-sets">1 × 100 pumps</span>
-          </div>
+          <div class="exercise-top"><span class="exercise-name">Hundred</span><span class="exercise-sets">1 × 100 pumps</span></div>
           <p class="exercise-note">Keep your low back pressed down. Modify with bent knees if needed.</p>
         </div>
 
         <div class="exercise core">
-          <div class="exercise-top">
-            <span class="exercise-name">Leg Circles</span>
-            <span class="exercise-sets">3 × 10 each leg</span>
-          </div>
+          <div class="exercise-top"><span class="exercise-name">Leg Circles</span><span class="exercise-sets">3 × 10 each leg</span></div>
           <p class="exercise-note">Keep your pelvis still. Small circles are totally fine.</p>
         </div>
 
         <div class="exercise glute">
-          <div class="exercise-top">
-            <span class="exercise-name">Clamshell</span>
-            <span class="exercise-sets">3 × 15 each side</span>
-          </div>
+          <div class="exercise-top"><span class="exercise-name">Clamshell</span><span class="exercise-sets">3 × 15 each side</span></div>
           <p class="exercise-note">Targets the side glutes for hip shape and stability.</p>
         </div>
 
         <div class="exercise glute">
-          <div class="exercise-top">
-            <span class="exercise-name">Donkey Kicks</span>
-            <span class="exercise-sets">3 × 15 each side</span>
-          </div>
+          <div class="exercise-top"><span class="exercise-name">Donkey Kicks</span><span class="exercise-sets">3 × 15 each side</span></div>
           <p class="exercise-note">Squeeze at the top. Keep your hips square.</p>
         </div>
 
         <div class="exercise core">
-          <div class="exercise-top">
-            <span class="exercise-name">Reverse Crunch</span>
-            <span class="exercise-sets">3 × 12 reps</span>
-          </div>
+          <div class="exercise-top"><span class="exercise-name">Reverse Crunch</span><span class="exercise-sets">3 × 12 reps</span></div>
           <p class="exercise-note">Lift your hips without swinging your legs.</p>
         </div>
 
         <div class="exercise core">
-          <div class="exercise-top">
-            <span class="exercise-name">Dumbbell Side Bend</span>
-            <span class="exercise-sets">3 × 12 each side</span>
-          </div>
+          <div class="exercise-top"><span class="exercise-name">Dumbbell Side Bend</span><span class="exercise-sets">3 × 12 each side</span></div>
           <p class="exercise-note">Slow, gentle, and controlled.</p>
         </div>
 
@@ -645,7 +553,7 @@
       </div>
     </section>
 
-    <section class="day-card" style="--day-color:#eadfff" data-card="2">
+    <section class="day-card" data-card="2">
       <div class="day-card-header">
         <div class="day-card-header-inner">
           <div>
@@ -668,50 +576,32 @@
         <p class="section-label">Exercises</p>
 
         <div class="exercise upper">
-          <div class="exercise-top">
-            <span class="exercise-name">Lat Pulldown, Wide Grip</span>
-            <span class="exercise-sets">3 × 12 reps</span>
-          </div>
+          <div class="exercise-top"><span class="exercise-name">Lat Pulldown, Wide Grip</span><span class="exercise-sets">3 × 12 reps</span></div>
           <p class="exercise-note">Great for back definition and posture.</p>
         </div>
 
         <div class="exercise upper">
-          <div class="exercise-top">
-            <span class="exercise-name">Face Pull</span>
-            <span class="exercise-sets">3 × 15 reps</span>
-          </div>
+          <div class="exercise-top"><span class="exercise-name">Face Pull</span><span class="exercise-sets">3 × 15 reps</span></div>
           <p class="exercise-note">Pull toward your forehead with elbows high.</p>
         </div>
 
         <div class="exercise upper">
-          <div class="exercise-top">
-            <span class="exercise-name">Dumbbell Shoulder Press</span>
-            <span class="exercise-sets">3 × 10 reps</span>
-          </div>
+          <div class="exercise-top"><span class="exercise-name">Dumbbell Shoulder Press</span><span class="exercise-sets">3 × 10 reps</span></div>
           <p class="exercise-note">Brace your core and avoid arching your back.</p>
         </div>
 
         <div class="exercise core">
-          <div class="exercise-top">
-            <span class="exercise-name">Dumbbell Side Bend</span>
-            <span class="exercise-sets">3 × 12 each side</span>
-          </div>
+          <div class="exercise-top"><span class="exercise-name">Dumbbell Side Bend</span><span class="exercise-sets">3 × 12 each side</span></div>
           <p class="exercise-note">Slow and controlled waist work.</p>
         </div>
 
         <div class="exercise upper">
-          <div class="exercise-top">
-            <span class="exercise-name">Dumbbell Bicep Curl</span>
-            <span class="exercise-sets">3 × 12 reps</span>
-          </div>
+          <div class="exercise-top"><span class="exercise-name">Dumbbell Bicep Curl</span><span class="exercise-sets">3 × 12 reps</span></div>
           <p class="exercise-note">Control the lowering phase — that’s where the work is.</p>
         </div>
 
         <div class="exercise core">
-          <div class="exercise-top">
-            <span class="exercise-name">Bird Dog</span>
-            <span class="exercise-sets">3 × 10 each side</span>
-          </div>
+          <div class="exercise-top"><span class="exercise-name">Bird Dog</span><span class="exercise-sets">3 × 10 each side</span></div>
           <p class="exercise-note">Keep your hips level. Think balance, core, and glute activation.</p>
         </div>
 
@@ -725,7 +615,7 @@
       </div>
     </section>
 
-    <section class="day-card" style="--day-color:#ffe7f1" data-card="3">
+    <section class="day-card" data-card="3">
       <div class="day-card-header">
         <div class="day-card-header-inner">
           <div>
@@ -748,50 +638,32 @@
         <p class="section-label">Exercises</p>
 
         <div class="exercise cardio">
-          <div class="exercise-top">
-            <span class="exercise-name">Walkpad Intervals</span>
-            <span class="exercise-sets">15 min total</span>
-          </div>
+          <div class="exercise-top"><span class="exercise-name">Walkpad Intervals</span><span class="exercise-sets">15 min total</span></div>
           <p class="exercise-note">2 min easy, 1 min fast, repeat.</p>
         </div>
 
         <div class="exercise full">
-          <div class="exercise-top">
-            <span class="exercise-name">Dumbbell Squat to Press</span>
-            <span class="exercise-sets">3 × 12 reps</span>
-          </div>
+          <div class="exercise-top"><span class="exercise-name">Dumbbell Squat to Press</span><span class="exercise-sets">3 × 12 reps</span></div>
           <p class="exercise-note">Squat down, then press dumbbells overhead as you stand.</p>
         </div>
 
         <div class="exercise core">
-          <div class="exercise-top">
-            <span class="exercise-name">Pilates Roll-Up</span>
-            <span class="exercise-sets">3 × 10 reps</span>
-          </div>
+          <div class="exercise-top"><span class="exercise-name">Pilates Roll-Up</span><span class="exercise-sets">3 × 10 reps</span></div>
           <p class="exercise-note">Slow and controlled. Modify with bent knees if needed.</p>
         </div>
 
         <div class="exercise glute">
-          <div class="exercise-top">
-            <span class="exercise-name">Clamshell</span>
-            <span class="exercise-sets">3 × 15 each side</span>
-          </div>
+          <div class="exercise-top"><span class="exercise-name">Clamshell</span><span class="exercise-sets">3 × 15 each side</span></div>
           <p class="exercise-note">Add a band above the knees when you want to level up.</p>
         </div>
 
         <div class="exercise lower">
-          <div class="exercise-top">
-            <span class="exercise-name">Dumbbell Romanian Deadlift</span>
-            <span class="exercise-sets">3 × 12 reps</span>
-          </div>
+          <div class="exercise-top"><span class="exercise-name">Dumbbell Romanian Deadlift</span><span class="exercise-sets">3 × 12 reps</span></div>
           <p class="exercise-note">Hamstrings, glutes, and back all at once.</p>
         </div>
 
         <div class="exercise core">
-          <div class="exercise-top">
-            <span class="exercise-name">Dead Bug</span>
-            <span class="exercise-sets">3 × 10 each side</span>
-          </div>
+          <div class="exercise-top"><span class="exercise-name">Dead Bug</span><span class="exercise-sets">3 × 10 each side</span></div>
           <p class="exercise-note">Finish with control. Deep core stabilizer.</p>
         </div>
 
@@ -806,12 +678,12 @@
     </section>
 
     <div class="legend">
-      <span class="legend-tag" style="background:#fff4db;color:#9d6b16">core</span>
-      <span class="legend-tag" style="background:#ffe8f1;color:#a13c67">glute</span>
-      <span class="legend-tag" style="background:#e9edff;color:#4c5da7">upper</span>
-      <span class="legend-tag" style="background:#e6f6ed;color:#2e7d52">lower</span>
-      <span class="legend-tag" style="background:#e1f7fb;color:#007383">cardio</span>
-      <span class="legend-tag" style="background:#f0e8ff;color:#704cae">full</span>
+      <span class="legend-tag" style="background:#fff4dc;color:#9d6b16">core</span>
+      <span class="legend-tag" style="background:#ffe8f2;color:#a13c67">glute</span>
+      <span class="legend-tag" style="background:#e8edff;color:#4c5da7">upper</span>
+      <span class="legend-tag" style="background:#e6f7ee;color:#2e7d52">lower</span>
+      <span class="legend-tag" style="background:#e1f8fb;color:#007383">cardio</span>
+      <span class="legend-tag" style="background:#f1e9ff;color:#704cae">full</span>
     </div>
 
     <button type="button" class="tips-btn" id="tipsBtn">
@@ -860,40 +732,31 @@
   </main>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const tabs = document.querySelectorAll(".day-tab");
-      const cards = document.querySelectorAll(".day-card");
-      const tipsBtn = document.getElementById("tipsBtn");
-      const tipsList = document.getElementById("tipsList");
+    const tabs = document.querySelectorAll(".day-tab");
+    const cards = document.querySelectorAll(".day-card");
+    const tipsBtn = document.getElementById("tipsBtn");
+    const tipsList = document.getElementById("tipsList");
 
-      tabs.forEach(function (tab) {
-        tab.addEventListener("click", function () {
-          const selectedDay = tab.getAttribute("data-day");
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const selectedDay = tab.dataset.day;
 
-          tabs.forEach(function (item) {
-            item.classList.remove("active");
-          });
+        tabs.forEach((item) => item.classList.remove("active"));
+        cards.forEach((card) => card.classList.remove("active"));
 
-          cards.forEach(function (card) {
-            card.classList.remove("active");
-          });
+        tab.classList.add("active");
 
-          tab.classList.add("active");
-
-          const selectedCard = document.querySelector('.day-card[data-card="' + selectedDay + '"]');
-          if (selectedCard) {
-            selectedCard.classList.add("active");
-          }
-        });
+        const selectedCard = document.querySelector(`[data-card="${selectedDay}"]`);
+        if (selectedCard) selectedCard.classList.add("active");
       });
+    });
 
-      tipsBtn.addEventListener("click", function () {
-        const isOpen = tipsList.classList.toggle("open");
-        tipsBtn.classList.toggle("open", isOpen);
-        tipsBtn.innerHTML = isOpen
-          ? "▲ Hide Results Tips &amp; Lifestyle Notes"
-          : "▼ Show Results Tips &amp; Lifestyle Notes";
-      });
+    tipsBtn.addEventListener("click", () => {
+      const isOpen = tipsList.classList.toggle("open");
+      tipsBtn.classList.toggle("open", isOpen);
+      tipsBtn.innerHTML = isOpen
+        ? "▲ Hide Results Tips &amp; Lifestyle Notes"
+        : "▼ Show Results Tips &amp; Lifestyle Notes";
     });
   </script>
 </body>
